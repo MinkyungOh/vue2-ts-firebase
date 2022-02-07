@@ -1,33 +1,39 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      <v-btn>oooo</v-btn>
-    </div>
-    <router-view/>
-  </div>
+<v-app>
+  <v-main>
+    <LayoutNormal v-if="isAuth" />
+    <LayoutAuth v-else />
+  </v-main>
+  <!-- <hr>
+  <FirebaseTest /> -->
+  <v-main>
+    <v-container class="justify-center align-center" fill-height>
+      <ModelTest />
+    </v-container>
+  </v-main>
+</v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import LayoutNormal from '@/components/layout/normal.vue';
+import LayoutAuth from '@/components/layout/auth.vue';
+// import FirebaseTest from '@/components/layout/firebaseTest.vue';
+//import ModelTest from '@/components/test/model.vue';
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@Component({
+  components: {
+    LayoutNormal,
+    LayoutAuth,
+    // FirebaseTest,
+    //ModelTest,
   }
+})
+export default class App extends Vue {
+  isAuth = false
 }
+</script>
+
+
+<style lang="scss">
 </style>
